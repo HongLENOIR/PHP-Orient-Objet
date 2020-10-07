@@ -98,3 +98,104 @@ echo '<h1>' .$eleve2->getNom() .'</h1>' ;
 $eleve->setNom('Eloÿ');
 echo '<h1>' .$eleve->getNom() .'</h1><br>' ;
 
+# Création des Eleves
+$eleve3 = new Eleve('Zaklin', 'POCANDI', 49, 'femme');
+$eleve4 = new Eleve('Koumba', 'KONARE', 28, 'femme');
+$eleve5 = new Eleve('Emmanuelle', 'ARNAUD', 33, 'femme');
+$eleve6 = new Eleve('Sandra', 'JACQUES', 48, 'femme');
+echo '<pre>';
+print_r($eleve3);
+print_r($eleve4);
+print_r($eleve5);
+print_r($eleve6);
+echo '</pre>';
+
+# Création des Classes
+$front = new Classe('Front', 18, 'Fadhi NASRI');
+$back = new Classe('Back', 18, 'Mathieu QUITTARD');
+$full = new Classe('Fullstack', 18, 'Hugo LIEGEARD');
+echo '<pre>';
+print_r($front);
+print_r($back);
+print_r($full);
+echo '</pre>';
+
+
+# Problématique
+# Comment affecter chaque élève dans une classe?
+$front->addEleves($eleve4); // affecter un eleve dans une classe
+$front->addEleves($eleve6);
+$back->addEleves($eleve3);
+$full->addEleves($eleve5);
+echo '<pre>';
+print_r($front);
+print_r($back);
+print_r($full);
+echo '</pre>';
+
+# Comment affecter chaque classe dans une école?
+# collection objet->éléve dans le tableau dans un objet->classe
+$ecole->addClasses($front);
+$ecole->addClasses($back);
+$ecole->addClasses($full);
+
+echo '<pre>';
+print_r($ecole);
+echo '</pre>';
+/*$ecole2->setClasses([$classe,$classe2,$full]);
+echo '<pre>';
+print_r($ecole2);
+echo '</pre><hr>';*/
+
+/*
+ * Consigne: en partant de l'objet $ecole; affichez la liste ol, ul, li des classes et pour chaque classes les étudiants
+ */
+# 1, Récupérer via $ecole et Afficher la liste des classes
+$classes =$ecole->getClasses();
+//print_r($classes);
+
+# On va parcourir nos classes
+echo '<ol>';
+    /** @var Classe $class */
+    foreach ($classes as $classe){ //foreach($classes as $objetClasse
+        // Afficher le nom de la classe
+        echo '<li>'.$classe->getNom().'<br>' .'</li>';
+
+        # 2, Récupérer et Afficher la liste des élèves itération 重复；一再地做；反复申说 algorithme[数, 信]算法 Fr helper cop yright
+        $eleves = $classe->getEleves();
+        echo '<ul>';
+        /**@ var Eleve $eleve*/
+        foreach ($eleves as $eleve){
+            echo '<li>'.$eleve->getPrenom().' '. $eleve->getNom() .'</li>';
+        } #endforeach eleves
+        echo '</ul>';
+    } #endforeach classes
+echo '</ol><hr>';
+
+echo '<table border="1">';
+echo '<h1><b>Ecole</b></h1>';
+echo '<style>th,td { padding: 10px;} </style>';
+$classes =$ecole->getClasses();
+foreach ($classes as $classe){
+    echo '<th style="color: black;">'.$classe->getNom() .'<br></th>';
+
+    $eleves = $classe->getEleves();
+    foreach ($eleves as $eleve){
+        echo '<td>'.$eleve->getPrenom().' '. $eleve->getNom() .'</td>';
+    }
+}
+echo '</table><hr>';
+
+
+/*$ecole->setClasses([$front,$back,$full]);
+$front->setEleves([$eleve3,$eleve4]);
+$back->setEleves([$eleve5]);
+$full->setEleves([$eleve6]);
+$ecole = new Class($front,$back,$full)
+foreach ($ecole->getClasses() AS $value ) {
+    // $ecole sera mis à jour avec chaque valeur de $ecole...
+    echo '<li>'.$ecole->getClasses(). '</li>';
+        foreach($classe AS $value2){
+            echo '<ol>'.$classe->getEleve(). '</ol>';
+        }
+}*/
